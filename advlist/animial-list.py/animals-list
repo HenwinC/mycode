@@ -1,0 +1,2 @@
+animalList = ["dog","cat","cow","Ant","Bee"]
+print(animalList)
