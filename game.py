@@ -22,13 +22,13 @@ def showStatus():
   print('---------------------------')
   print('You are in the ' +  currentRoom)
   #print the current inventory
+  print(rooms[currentRoom]["description"])
   print('Inventory : ' + str(inventory))
   #print an item if there is one
-  print(rooms[currentRoom]["description"])
+ 
+  print(rooms[currentRoom]["nextMove"])
   if "item" in rooms[currentRoom]:
     print('You see a ' + rooms[currentRoom]['item'])
-
-  print(rooms[currentRoom]["description"])
   print("---------------------------")
 
 #an inventory, which is initially empty
@@ -41,30 +41,41 @@ rooms = {
                   'down' : 'Hallway',
                   'item' : 'butter knife',
             'description': 'A typical bedroom with no major weapons. Thankfully you made that PB and J sandwhich last night.',
+            'nextMove'   : 'down: Hallway'
                 },
 
             'Hallway' : { 
                   'up'  : 'Bedroom',
                 'left'  : 'Living Room',
                 'right' : 'Kitchen',
+           'description': 'Its a looonnnng hallway.',
+            'nextMove'  : 'up: Bedroom, left: Livingroom, right: Kitchen'
                 },
             'Living Room' : {
                   'right' : 'Hallway',
                   'left'  : 'Garage',
                   'up'    : 'Kitchen',
                   'down'  : 'Basement',
-                  'item'  : 'grandmas sandal'
+                  'item'  : 'grandmas sandal',
+             'description': 'A cool place to hang out. With one of the most accurate weapons of them all',
+               'nextMove' : 'down: Basement, left: Garage, up: Kitchen'
                },
             'Kitchen' : {
-                  'item' : 'Thieve'
+                  'item' : 'Thieve',
+            'description': 'YOU FOUND THE THIEVE. NOW WHAT ARE YOU GONNA DO ABOUT IT!',
+              'nextMove' : 'No Escaping'
                },
             'Garage' : {
               'right' : 'Living Room',
-              'item'  : 'shotgun shells'
+              'item'  : 'shotgun shells',
+         'description': 'Cold and Dusty. You should really do some cleaning in here.',
+            'nextMove': 'right: Livingroom'
             },
             'Basement' : {
               'up'  : 'Living Room',
-              'item': 'shotgun'
+              'item': 'shotgun',
+       'description': 'Thats where you you put that thing.',
+          'nextMove': 'up: Livingroom'
             }
          }
 
@@ -106,7 +117,7 @@ def combat_Mode():
       player_health = player_health - 3
       print(f'Thieve hits you with a open hand smack....Disrespecful {player_health}')
     if player_health <= 0:
-      print(f'RIP. You Lose, lets restart')
+      print(f'RIP. You Lose')
       currentRoom == 'Bedroom'
       False
       break
